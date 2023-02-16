@@ -21,13 +21,13 @@ def get_sample(params):
     sample = con.execute(f"SELECT * FROM my_table WHERE name = '{display_name}'").df()
     sample.style.set_properties(**{'text-align': 'left'})
 
-    return [alt.Chart(sample).encode(x='day(sent):T', y='count()').mark_bar(opacity='0.8'), dp.Table(sample)]
+    return [alt.Chart(sample).encode(x='day(sent):T', y='count()').mark_bar(), dp.Table(sample)]
 
 v = dp.View(
   dp.Text("# Chat analysis app"),
   dp.Function(
       get_sample,
-      controls=[
+      controls=
           dp.Choice(
               options=list(filtered_chats['name'].dropna().unique()),
               name='display_name',
